@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://cj8rug5ml2gcv"]
+
+[ext_resource type="Script" uid="uid://cy7h0kg8fknu6" path="res://Scripts/Characters/Enemies/normal_enemy.gd" id="1_br4l2"]
+[ext_resource type="Texture2D" uid="uid://dhhsscrn6ucp2" path="res://icon.svg" id="2_cxtvy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nt8tq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cxtvy"]
+
+[node name="normal_enemy" type="CharacterBody2D"]
+script = ExtResource("1_br4l2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_nt8tq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_cxtvy")
+
+[node name="attack_area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attack_area"]
+shape = SubResource("RectangleShape2D_cxtvy")
+
+[connection signal="body_entered" from="attack_area" to="." method="_on_attack_area_body_entered"]

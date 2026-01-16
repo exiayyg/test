@@ -5,6 +5,8 @@ extends CharacterBody2D
 @export var health: float = 100
 signal shoot_string(player_position: Vector2)
 
+const is_player: bool = true
+
 func _physics_process(_delta: float) -> void:
 	direction = Input.get_vector("Left","Right","Up","Down")
 	velocity = speed * direction
@@ -14,8 +16,8 @@ func _physics_process(_delta: float) -> void:
 		Shoot()
 
 func Shoot():
-	shoot_string.emit(global_position)
+	shoot_string.emit(global_position, get_global_mouse_position())
 	print("shoot")
 	
-func hurt():
-	pass
+func hurt(damage: float):
+	health -= damage
