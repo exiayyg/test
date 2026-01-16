@@ -395,3 +395,17 @@ $RECYCLE.BIN/
 *.msp
 *.lnk
 *.generated.props
+
+# Godot
+# .godot 文件夹 (Godot 4+ 的核心缓存，绝对不要传)
+.godot/
+
+# 崩溃日志等临时文件
+*.log
+
+# 导出的构建文件 (通常不需要把打包好的 .exe/.html 传到源码库)
+# 假设你把构建结果放在 build 文件夹下
+/build/
+
+# Godot 3.x 的缓存 (如果你还在用旧版，虽然看名字你用的是 4.x)
+.import/
