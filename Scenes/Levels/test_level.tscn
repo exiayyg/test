@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpk0loj7y6sj3"]
+
+[ext_resource type="PackedScene" uid="uid://doix4tmk08j2l" path="res://Scenes/characters/player.tscn" id="1_7t06c"]
+
+[node name="Test_Level" type="Node2D"]
+
+[node name="BackGround" type="Sprite2D" parent="."]
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Bullets" type="Node2D" parent="."]
+
+[node name="Player" parent="." instance=ExtResource("1_7t06c")]
+position = Vector2(0, -1)
