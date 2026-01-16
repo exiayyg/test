@@ -1,0 +1,5 @@
+res://Scenes/Bullets/bullet.tscn
+res://Scripts/Global/global.gd
+res://Scripts/Levels/test_level.gd
+res://Scenes/Levels/test_level.tscn
+res://Scripts/Characters/player.gd
