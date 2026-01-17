@@ -1,23 +1,59 @@
-[gd_scene load_steps=4 format=3 uid="uid://doix4tmk08j2l"]
+[gd_scene load_steps=7 format=3 uid="uid://doix4tmk08j2l"]
 
 [ext_resource type="Script" uid="uid://c3p6u2ylh0egf" path="res://Scripts/Characters/player.gd" id="1_pmukk"]
-[ext_resource type="Texture2D" uid="uid://dhhsscrn6ucp2" path="res://icon.svg" id="2_yh67s"]
+[ext_resource type="Texture2D" uid="uid://os8raknfsisb" path="res://Assets/Player/player.png" id="2_yh67s"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_yh67s"]
-size = Vector2(124, 124)
+[sub_resource type="CircleShape2D" id="CircleShape2D_yh67s"]
+radius = 40.1995
+
+[sub_resource type="Animation" id="Animation_yh67s"]
+resource_name = "hurt"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0.22745098, 0.23137255, 1), Color(1, 1, 1, 1), Color(1, 0.22745098, 0.23137255, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_5cv2o"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5cv2o"]
+_data = {
+&"RESET": SubResource("Animation_5cv2o"),
+&"hurt": SubResource("Animation_yh67s")
+}
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
-collision_mask = 16
+collision_mask = 20
 script = ExtResource("1_pmukk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(0.5, 0.5)
-shape = SubResource("RectangleShape2D_yh67s")
+shape = SubResource("CircleShape2D_yh67s")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 1.5707964
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.03, 0.03)
 texture = ExtResource("2_yh67s")
 
 [node name="Timer_node" type="Node" parent="."]
@@ -27,6 +63,14 @@ texture = ExtResource("2_yh67s")
 [node name="can_hurt_cooldown" type="Timer" parent="Timer_node"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Bullet_Spwan" type="Marker2D" parent="."]
+position = Vector2(19, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_5cv2o")
+}
 
 [connection signal="timeout" from="Timer_node/shoot_cooldown" to="." method="_on_shoot_cooldown_timeout"]
 [connection signal="timeout" from="Timer_node/can_hurt_cooldown" to="." method="_on_can_hurt_cooldown_timeout"]

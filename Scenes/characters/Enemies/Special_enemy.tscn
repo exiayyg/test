@@ -6,6 +6,8 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_o47tw"]
 
 [node name="Special_Enemy" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 24
 script = ExtResource("1_cp8dv")
 metadata/_custom_type_script = "uid://cy7h0kg8fknu6"
 

@@ -17,4 +17,4 @@ func set_direction(bullet_direction: Vector2):
 func _on_body_entered(body: Node2D) -> void:#子弹碰撞信号
 	if "is_enemy" in body:#如果碰撞对象是敌人
 		body.queue_free()#销毁敌人
-		queue_free()#销毁子弹
+	queue_free()#销毁子弹

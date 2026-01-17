@@ -8,7 +8,9 @@ extends CharacterBody2D
 
 var can_shoot: bool = true#判断是否处于开火冷却
 var can_hurt: bool = true#判断是否处于可受伤状态，true为可受伤，false为无敌状态
+
 signal shoot_string(player_position: Vector2, mouse_position: Vector2)#发射子弹信号,需要传入发射点位置和鼠标点击位置
+signal player_died
 
 const is_player: bool = true#判断是否是玩家
 
@@ -26,17 +28,19 @@ func _physics_process(_delta: float) -> void:
 
 #射击逻辑
 func Shoot():
-	shoot_string.emit(global_position, get_global_mouse_position())
+	shoot_string.emit($Bullet_Spwan.global_position, get_global_mouse_position())
 	#发送发射子弹信号，在level脚本调用
 	#print("shoot")
 
 func died():#玩家死亡逻辑
 	print("player died")
+	player_died.emit()
 	pass
 
 #伤害逻辑
 func hurt(damage: float):
 	if can_hurt:
+		$AnimationPlayer.play("hurt")
 		health -= damage
 		print("player hurted", health)
 		can_hurt = false
