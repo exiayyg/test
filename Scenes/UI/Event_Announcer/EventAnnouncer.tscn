@@ -1,0 +1,58 @@
+[gd_scene load_steps=4 format=3 uid="uid://xgldtuuctjaa"]
+
+[ext_resource type="Script" uid="uid://cycqwb2ltr231" path="res://Scripts/UI/Event_Announcer/event_announcer.gd" id="1_dv1b2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x4kvs"]
+bg_color = Color(0.6052743, 0.6052744, 0.6052742, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0.0093103545, 0.0093103545, 0.0093103545, 0.09803922)
+shadow_size = 2
+shadow_offset = Vector2(4, 6)
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_ylmy7"]
+color = Color(0.29954746, 0.29954746, 0.29954743, 1)
+thickness = 3
+
+[node name="EventAnnouncer" type="CanvasLayer"]
+layer = 2
+script = ExtResource("1_dv1b2")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="BannerContainer" type="PanelContainer" parent="Control"]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 48.0
+offset_right = 976.0
+offset_bottom = 144.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_x4kvs")
+
+[node name="ContentBox" type="VBoxContainer" parent="Control/BannerContainer"]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="Control/BannerContainer/ContentBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 21
+text = "  WARING                                                                                                                                     X"
+
+[node name="Separator" type="HSeparator" parent="Control/BannerContainer/ContentBox"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_ylmy7")
+
+[node name="DescLabel" type="Label" parent="Control/BannerContainer/ContentBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.26646256, 0.31053197, 0.9617582, 1)
+theme_override_font_sizes/font_size = 32
+text = "示例文本"
+horizontal_alignment = 1
