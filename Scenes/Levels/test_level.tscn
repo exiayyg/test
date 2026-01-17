@@ -24,7 +24,7 @@ position = Vector2(993, 455)
 wait_time = 2.0
 autostart = true
 
-[node name="Enemy" parent="." instance=ExtResource("4_db73o")]
+[node name="Special_Enemy" parent="." instance=ExtResource("4_db73o")]
 
 [connection signal="shoot_string" from="Player" to="." method="_on_player_shoot_string"]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
