@@ -16,8 +16,8 @@ func _physics_process(_delta: float) -> void:
 		died()
 
 #敌人受伤逻辑
-func hurt():
-	health -= damage
+func hurt(bullet_damage: float):
+	health -= bullet_damage
 
 #敌人死亡逻辑
 func died():
