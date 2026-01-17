@@ -26,5 +26,7 @@ texture = ExtResource("2_yh67s")
 
 [node name="can_hurt_cooldown" type="Timer" parent="Timer_node"]
 
+[node name="Camera2D" type="Camera2D" parent="."]
+
 [connection signal="timeout" from="Timer_node/shoot_cooldown" to="." method="_on_shoot_cooldown_timeout"]
 [connection signal="timeout" from="Timer_node/can_hurt_cooldown" to="." method="_on_can_hurt_cooldown_timeout"]
