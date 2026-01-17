@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cj8rug5ml2gcv"]
 
 [ext_resource type="Script" uid="uid://cy7h0kg8fknu6" path="res://Scripts/Characters/Enemies/normal_enemy.gd" id="1_br4l2"]
-[ext_resource type="Texture2D" uid="uid://dhhsscrn6ucp2" path="res://icon.svg" id="2_cxtvy"]
+[ext_resource type="Texture2D" uid="uid://bh41hlij1ycr5" path="res://Assets/Enemy/Bugs.png" id="2_cxtvy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vg13p"]
 
@@ -18,7 +18,7 @@ scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_vg13p")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.3, 0.3)
+scale = Vector2(0.03, 0.03)
 texture = ExtResource("2_cxtvy")
 
 [node name="attack_area" type="Area2D" parent="."]
@@ -32,6 +32,7 @@ shape = SubResource("RectangleShape2D_cxtvy")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
 [node name="NavigationTimer" type="Timer" parent="."]
+wait_time = 0.2
 autostart = true
 
 [connection signal="body_entered" from="attack_area" to="." method="_on_attack_area_body_entered"]

@@ -28,9 +28,24 @@ var debug_current_direction: Vector2 = Vector2.ZERO # 用于Debug绘制
 
 func _process(delta):
 	queue_redraw() 
+	SpecialUpdateSpriteRotation()
 
 func _physics_process(delta: float) -> void:
 	SpecialEnemyMovement(delta)
+
+# ============================================
+# Sprite2D随着敌人转向
+# ============================================
+func SpecialUpdateSpriteRotation():
+	# 只有在有移动速度时才更新旋转
+	if velocity.length() > 10:  # 设置一个最小速度阈值，避免抖动
+		# 计算移动方向的角度
+		var move_angle = velocity.angle()
+		# 平滑旋转（可选，使旋转更平滑）
+		sprite_2d.rotation = lerp_angle(sprite_2d.rotation, move_angle, 0.1)
+	else:
+		# 如果没有移动，保持当前方向
+		pass
 
 # =============================================
 # 特殊敌人的核心移动逻辑

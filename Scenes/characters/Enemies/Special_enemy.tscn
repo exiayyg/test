@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://0wcttjmqkm8d"]
 
 [ext_resource type="Script" uid="uid://dqhqjvef6x8w6" path="res://Scripts/Characters/Enemies/special_enemy.gd" id="1_cp8dv"]
-[ext_resource type="Texture2D" uid="uid://dhhsscrn6ucp2" path="res://icon.svg" id="2_6sp5y"]
+[ext_resource type="Texture2D" uid="uid://bh41hlij1ycr5" path="res://Assets/Enemy/Bugs.png" id="2_cp8dv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o47tw"]
 
@@ -15,8 +15,8 @@ shape = SubResource("CircleShape2D_o47tw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.36077514, 0.0006925053, 0.9843983, 1)
-scale = Vector2(0.355, 0.355)
-texture = ExtResource("2_6sp5y")
+scale = Vector2(0.02, 0.02)
+texture = ExtResource("2_cp8dv")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
