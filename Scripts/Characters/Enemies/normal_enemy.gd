@@ -4,7 +4,7 @@ extends CharacterBody2D
 
 @export var speed: float = 100 #移动速度
 @export var health: float = 100 #生命值
-@export var damage: float = 10 #伤害
+@export var damage: float = 1 #伤害
 
 const is_enemy: bool = true #是否为敌人
 
