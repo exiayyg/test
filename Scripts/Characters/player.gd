@@ -52,7 +52,7 @@ func PlayerMovement():
 	else:
 		# 正常控制
 		direction.x = Input.get_action_strength("Right") - Input.get_action_strength("Left")
-		direction.y = Input.get_action_strength("Down") - Input.get_action_strength("Up")
+		direction.y = Input.get_action_strength("Down") - Input.get_action_strength("Up")	
 	direction = direction.normalized()
 	velocity = speed * direction#修改玩家移动速度大小及方向
 	move_and_slide()#控制玩家移动

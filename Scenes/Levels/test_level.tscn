@@ -14,8 +14,8 @@ texture_region_size = Vector2i(40, 40)
 
 [sub_resource type="TileSet" id="TileSet_x4x4f"]
 tile_size = Vector2i(40, 40)
-physics_layer_0/collision_layer = 16
-physics_layer_0/collision_mask = 6
+physics_layer_0/collision_layer = 17
+physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_k8g1k")
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_npfmg"]
@@ -43,6 +43,7 @@ wait_time = 2.0
 autostart = true
 
 [node name="Special_Enemy" parent="." instance=ExtResource("4_db73o")]
+position = Vector2(802, 507)
 
 [node name="Tilemap" type="Node2D" parent="."]
 

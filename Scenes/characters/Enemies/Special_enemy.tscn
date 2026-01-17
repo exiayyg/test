@@ -10,11 +10,12 @@ script = ExtResource("1_cp8dv")
 metadata/_custom_type_script = "uid://cy7h0kg8fknu6"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2(2.675, 2.675)
+scale = Vector2(1.22, 1.22)
 shape = SubResource("CircleShape2D_o47tw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.36077514, 0.0006925053, 0.9843983, 1)
+scale = Vector2(0.355, 0.355)
 texture = ExtResource("2_6sp5y")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
