@@ -6,11 +6,15 @@ extends Node2D
 #预加载普通敌人场景
 @onready var player: CharacterBody2D = $Player
 
+@export var player_avater: Texture = preload("res://Assets/Player/player.png")
 #设置生成地图的边界
 @export var map_width: float = 1152.0
 @export var map_height: float =  648.0
 @export var spawn_margin: float = 50.0
 @export var map_center: Vector2 = Vector2(576, 324)
+
+func _ready() -> void:
+	GameHUD.instance.setup_player("Player", 1, 3)
 
 func _physics_process(_delta: float) -> void:
 	Global.player_position = player.global_position#实时更新玩家全局位置

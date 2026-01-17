@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @export var speed: float = 200#玩家移动速度
 @export var direction: Vector2 = Vector2(0, 0)#玩家移动方向
-@export var health: float = 3#玩家生命值
+@export var health: int = 3#玩家生命值
 @onready var game_state = get_node("/root/Global")
 
 
@@ -45,6 +45,7 @@ func hurt(damage: float):
 		print("player hurted", health)
 		can_hurt = false
 		$Timer_node/can_hurt_cooldown.start()
+		GameHUD.instance.update_health(health)
 	#玩家受伤逻辑
 
 #玩家移动逻辑
