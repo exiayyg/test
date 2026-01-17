@@ -6,7 +6,6 @@ extends Node2D
 @onready var player: CharacterBody2D = $Player
 
 
-
 func _physics_process(_delta: float) -> void:
 	Global.player_position = player.global_position
 
