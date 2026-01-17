@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://dvm2bnqttwhy8"]
+[gd_scene load_steps=2 format=3 uid="uid://dvm2bnqttwhy8"]
+
+[ext_resource type="Script" uid="uid://davf18o7obxav" path="res://Scripts/UI/Start_Screen/start_screen.gd" id="1_jx2uu"]
 
 [node name="StartScreen" type="Control"]
 layout_mode = 3
@@ -7,3 +9,46 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_jx2uu")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.3019608, 0.3019608, 0.3019608, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 0
+offset_left = 256.0
+offset_top = 256.0
+offset_right = 768.0
+offset_bottom = 576.0
+
+[node name="ButtonGroup" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="StartButton" type="Button" parent="CenterContainer/ButtonGroup"]
+custom_minimum_size = Vector2(240, 50)
+layout_mode = 2
+text = "开始游戏"
+
+[node name="ExitButton" type="Button" parent="CenterContainer/ButtonGroup"]
+custom_minimum_size = Vector2(240, 50)
+layout_mode = 2
+text = "结束游戏"
+
+[node name="StartScreenTitle" type="Label" parent="."]
+layout_mode = 0
+offset_left = 320.0
+offset_top = 128.0
+offset_right = 704.0
+offset_bottom = 192.0
+theme_override_font_sizes/font_size = 36
+text = "Debugger
+(Game Title)"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="CenterContainer/ButtonGroup/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="CenterContainer/ButtonGroup/ExitButton" to="." method="_on_exit_button_pressed"]
