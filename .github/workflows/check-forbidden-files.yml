@@ -6,61 +6,95 @@ on:
   pull_request:
     branches: [ main, master, develop ]
 
-# 如果需要在特定时间清理已存在的文件
-schedule:
-  # 每天凌晨3点自动检查（可选）
-  - cron: '0 3 * * *'
+# 必须显式声明权限，否则 schedule 下无法 push
+permissions:
+  contents: write
+  pull-requests: write
 
 jobs:
   check-forbidden-files:
     runs-on: ubuntu-latest
-    
+
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-      
-    - name: Check for Godot cache files
-      id: check-godot
-      run: |
-        # 检查是否有 .godot 目录被追踪
-        if find . -name ".godot" -type d 2>/dev/null | grep -q "."; then
-          echo "❌ 发现被 Git 追踪的 .godot 目录"
-          echo "::error file=.git/index,title=Forbidden Files Detected::发现 .godot 缓存目录被提交到仓库，请立即移除！"
-          echo "found=true" >> $GITHUB_OUTPUT
-          
-          # 列出具体文件
-          echo "找到的文件："
-          git ls-files | grep '\.godot/' || true
-          exit 1
-        else
-          echo "✅ 未发现被追踪的 .godot 目录"
-          echo "found=false" >> $GITHUB_OUTPUT
-        fi
-    
-    - name: Remove forbidden files (仅针对已存在的文件清理)
-      if: steps.check-godot.outputs.found == 'true' && github.event_name == 'schedule'
-      run: |
-        echo "正在清理 .godot 缓存文件..."
-        
-        # 从 Git 中移除但不删除本地文件
-        git rm -r --cached .godot 2>/dev/null || true
-        
-        # 提交更改
-        if [ -n "$(git status --porcelain)" ]; then
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git commit -m "chore: 自动移除 .godot 缓存目录 [skip ci]"
-          git push origin HEAD:${{ github.ref_name }}
-        fi
-        
-    - name: Post notification to PR
-      if: failure() && github.event_name == 'pull_request'
-      uses: actions/github-script@v6
-      with:
-        script: |
-          github.rest.issues.createComment({
-            issue_number: context.issue.number,
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            body: '⚠️ **检测到违规文件**\n\n发现 `.godot` 缓存目录被提交，请按照以下步骤处理：\n1. 从 Git 中移除：`git rm -r --cached .godot`\n2. 提交更改：`git commit -m "移除缓存文件"`\n3. 确保 `.gitignore` 包含 `.godot/`\n\n**请勿提交 IDE/编辑器缓存文件！**'
-          })
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check for Godot cache files
+        id: check-godot
+        shell: bash
+        run: |
+          echo "🔍 正在检查是否有被 Git 追踪的 .godot 目录..."
+
+          if git ls-files | grep -q '^\.godot/'; then
+            echo "❌ 发现被 Git 追踪的 .godot 缓存目录"
+            echo "::error title=Forbidden Files Detected::发现 .godot 缓存目录被提交到仓库，请立即移除！"
+            echo "found=true" >> "$GITHUB_OUTPUT"
+
+            echo ""
+            echo "📂 被追踪的违规文件列表："
+            git ls-files | grep '^\.godot/' || true
+
+            exit 1
+          else
+            echo "✅ 未发现被 Git 追踪的 .godot 目录"
+            echo "found=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Scheduled cleanup of forbidden files
+        if: steps.check-godot.outputs.found == 'true' && github.event_name == 'schedule'
+        shell: bash
+        run: |
+          echo "🧹 开始自动清理 .godot 缓存目录（仅移除 Git 追踪）..."
+
+          git rm -r --cached .godot || true
+
+          # 确保 .gitignore 中包含规则
+          if [ ! -f .gitignore ]; then
+            touch .gitignore
+          fi
+
+          if ! grep -q '^\.godot/' .gitignore; then
+            echo ".godot/" >> .gitignore
+            echo "➕ 已补充 .gitignore 忽略规则"
+          fi
+
+          if [ -n "$(git status --porcelain)" ]; then
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git config user.name "github-actions[bot]"
+            git commit -m "chore: remove .godot cache directory [skip ci]"
+            git push origin HEAD:main
+          else
+            echo "ℹ️ 没有需要提交的变更"
+          fi
+
+      - name: Post notification to PR
+        if: failure() && github.event_name == 'pull_request'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: [
+                '⚠️ **检测到违规文件提交**',
+                '',
+                '发现 `.godot` 缓存目录被提交到仓库，请按以下步骤处理：',
+                '',
+                '1. 从 Git 中移除缓存目录：',
+                '   ```bash',
+                '   git rm -r --cached .godot',
+                '   ```',
+                '',
+                '2. 确保 `.gitignore` 中包含：',
+                '   ```',
+                '   .godot/',
+                '   ```',
+                '',
+                '3. 提交并推送修改',
+                '',
+                '**请勿提交任何引擎 / IDE / 编辑器生成的缓存文件。**'
+              ].join('\n')
+            })
