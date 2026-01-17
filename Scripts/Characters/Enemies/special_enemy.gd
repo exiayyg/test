@@ -19,6 +19,7 @@ extends Enemy
 var distance_to_player: Vector2
 var current_wander_direction: Vector2 = Vector2.ZERO
 var wander_timer: float = 0.0
+@onready var game_state = get_node("/root/Global")
 
 func _physics_process(delta: float) -> void:
 	SpecialEnemyMovement(delta)
@@ -95,3 +96,10 @@ func MakeDirectionSafe(input_direction: Vector2) -> Vector2:
 	var biased_direction = input_direction.lerp(direction_to_safe_center, boundary_avoidance_strength).normalized()
 	
 	return biased_direction
+
+
+func _ready():
+	game_state.register_special_enemy()
+
+func _exit_tree():
+	game_state.unregister_special_enemy()
