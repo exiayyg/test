@@ -51,6 +51,6 @@ func GetRandomSpawnPositionOutsideMap() -> Vector2:
 			spawn_pos.y = randf_range(0, map_height)
 	return spawn_pos
 
-
+#Test_Level节点下SpawnTimer生成敌人时间信号
 func _on_spawn_timer_timeout() -> void:
 	create_enemies()
