@@ -1,29 +1,31 @@
 extends CharacterBody2D
 
-@export var speed: float = 200 #玩家速度
-@export var direction: Vector2 = Vector2(0, 0) #玩家移动方向
-@export var health: float = 100 #生命值
-signal shoot_string(player_position: Vector2) #射击信号
+@export var speed: float = 200#玩家移动速度
+@export var direction: Vector2 = Vector2(0, 0)#玩家移动方向
+@export var health: float = 3#玩家生命值
+signal shoot_string(player_position: Vector2, mouse_position: Vector2)#发射子弹信号,需要传入发射点位置和鼠标点击位置
 
-const is_player: bool = true
+const is_player: bool = true#判断是否是玩家
 
 func _physics_process(_delta: float) -> void:
 	PlayerMovement()
-	look_at(get_global_mouse_position())
-	if Input.is_action_just_pressed("Shoot"):
+	look_at(get_global_mouse_position())#玩家看向鼠标位置
+	if Input.is_action_just_pressed("Shoot"):#鼠标左键发射子弹
 		Shoot()
 
 #射击逻辑
 func Shoot():
 	shoot_string.emit(global_position, get_global_mouse_position())
-	print("shoot")
+	#发送发射子弹信号，在level脚本调用
+	#print("shoot")
 
-#玩家伤害逻辑
+#伤害逻辑
 func hurt(damage: float):
 	health -= damage
+	#玩家受伤逻辑
 
 #玩家移动逻辑
 func PlayerMovement():
-	direction = Input.get_vector("Left","Right","Up","Down")
-	velocity = speed * direction
-	move_and_slide()
+	direction = Input.get_vector("Left","Right","Up","Down")#获取移动方向
+	velocity = speed * direction#修改玩家移动速度大小及方向
+	move_and_slide()#控制玩家移动
