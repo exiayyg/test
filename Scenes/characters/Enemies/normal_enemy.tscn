@@ -10,7 +10,7 @@ size = Vector2(64.625854, 64.625854)
 
 [node name="normal_enemy" type="CharacterBody2D"]
 collision_layer = 4
-collision_mask = 16
+collision_mask = 17
 script = ExtResource("1_br4l2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

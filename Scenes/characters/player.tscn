@@ -8,7 +8,7 @@ size = Vector2(124, 124)
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
-collision_mask = 20
+collision_mask = 16
 script = ExtResource("1_pmukk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
