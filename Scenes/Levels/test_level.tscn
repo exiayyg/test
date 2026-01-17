@@ -19,4 +19,9 @@ position = Vector2(0, -1)
 [node name="normal_enemy" parent="." instance=ExtResource("3_2ytpj")]
 position = Vector2(993, 455)
 
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
 [connection signal="shoot_string" from="Player" to="." method="_on_player_shoot_string"]
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
