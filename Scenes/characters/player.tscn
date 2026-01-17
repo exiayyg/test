@@ -14,3 +14,12 @@ shape = SubResource("CircleShape2D_lju0b")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 1.5707964
 texture = ExtResource("2_yh67s")
+
+[node name="Timer_node" type="Node" parent="."]
+
+[node name="shoot_cooldown" type="Timer" parent="Timer_node"]
+
+[node name="can_hurt_cooldown" type="Timer" parent="Timer_node"]
+
+[connection signal="timeout" from="Timer_node/shoot_cooldown" to="." method="_on_shoot_cooldown_timeout"]
+[connection signal="timeout" from="Timer_node/can_hurt_cooldown" to="." method="_on_can_hurt_cooldown_timeout"]
