@@ -16,10 +16,13 @@ extends Enemy
 #@export var ray_angle_range:float = 45.0
 @export var boundary_avoidance_strength: float = 0.6 # 边界回避强度 (0.0-1.0)。值越高，徘徊时越倾向于朝“安全环中心”调整方向，防止越界抖动。
 #@export var prediction_distance: float = 80.0
+
 var distance_to_player: Vector2
 var current_wander_direction: Vector2 = Vector2.ZERO
 var wander_timer: float = 0.0
 @onready var game_state = get_node("/root/Global")
+
+
 
 func _physics_process(delta: float) -> void:
 	SpecialEnemyMovement(delta)

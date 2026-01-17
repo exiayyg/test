@@ -3,16 +3,21 @@
 [ext_resource type="Script" uid="uid://c3p6u2ylh0egf" path="res://Scripts/Characters/player.gd" id="1_pmukk"]
 [ext_resource type="Texture2D" uid="uid://dhhsscrn6ucp2" path="res://icon.svg" id="2_yh67s"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_lju0b"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yh67s"]
+size = Vector2(124, 124)
 
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 20
 script = ExtResource("1_pmukk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_lju0b")
+scale = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_yh67s")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 1.5707964
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_yh67s")
 
 [node name="Timer_node" type="Node" parent="."]

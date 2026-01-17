@@ -6,9 +6,14 @@ extends CharacterBody2D
 @export var health: float = 100 #生命值
 @export var damage: float = 1 #伤害
 
+
 const is_enemy: bool = true #是否为敌人
 
+var target_position: Vector2 = Vector2(0, 0)#寻路导航下一目标位置
 var direction: Vector2 = Vector2(0, 0) #敌人朝向玩家的方向
+
+func _ready() -> void:
+	$NavigationAgent2D.target_position = Global.player_position#在敌人初始化时将玩家位置设为目标位置
 
 func _physics_process(_delta: float) -> void:
 	EnemyMovement()
@@ -30,7 +35,13 @@ func _on_attack_area_body_entered(body: Node2D) -> void:
 
 #敌人移动逻辑
 func EnemyMovement():
-	direction = (Global.player_position - global_position).normalized()
+	target_position = $NavigationAgent2D.get_next_path_position()#获取导航下一个位置
+	direction = (target_position - global_position).normalized()#根据导航的下一位置修改移动
 	velocity = speed * direction
+	look_at(target_position)#敌人始终看向移动方向
 	move_and_slide()
 	#敌人朝向玩家直线移动
+
+
+func _on_catch_player_position_timeout() -> void:
+	$NavigationAgent2D.target_position = Global.player_position#倒计时结束时获取将当前玩家位置设置为导航的下一个位置

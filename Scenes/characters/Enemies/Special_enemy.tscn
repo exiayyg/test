@@ -16,3 +16,8 @@ shape = SubResource("CircleShape2D_o47tw")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.36077514, 0.0006925053, 0.9843983, 1)
 texture = ExtResource("2_6sp5y")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="NavigationTimer" type="Timer" parent="."]
+autostart = true
