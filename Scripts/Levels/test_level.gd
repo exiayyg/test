@@ -7,10 +7,10 @@ extends Node2D
 @onready var player: CharacterBody2D = $Player
 
 #设置生成地图的边界
-@export var map_width: float = 1000.0 
-@export var map_height: float =  600.0
+@export var map_width: float = 1152.0
+@export var map_height: float =  648.0
 @export var spawn_margin: float = 50.0
-
+@export var map_center: Vector2 = Vector2(576, 324)
 
 func _physics_process(_delta: float) -> void:
 	Global.player_position = player.global_position#实时更新玩家全局位置
@@ -38,17 +38,17 @@ func GetRandomSpawnPositionOutsideMap() -> Vector2:
 	
 	match side:
 		0:#上边
-			spawn_pos.x = randf_range(-map_width/2, map_width/2)
-			spawn_pos.y = -map_height/2 - spawn_margin
+			spawn_pos.x = randf_range(0, map_width)
+			spawn_pos.y = 0 - spawn_margin
 		1:#右边
-			spawn_pos.x = map_width/2 + spawn_margin
-			spawn_pos.y = randf_range(-map_height/2, map_height/2)
+			spawn_pos.x = map_width + spawn_margin
+			spawn_pos.y = randf_range(0, map_height)
 		2:#下边
-			spawn_pos.x = randf_range(-map_width/2, map_width/2)
-			spawn_pos.y = map_height/2 + spawn_margin
+			spawn_pos.x = randf_range(0, map_width)
+			spawn_pos.y = map_height + spawn_margin
 		3:#左边
-			spawn_pos.x = -map_width/2 - spawn_margin
-			spawn_pos.y = randf_range(-map_height/2, map_height/2)
+			spawn_pos.x = 0 - spawn_margin
+			spawn_pos.y = randf_range(0, map_height)
 	return spawn_pos
 
 

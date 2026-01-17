@@ -14,7 +14,7 @@ script = ExtResource("1_b07c4")
 [node name="Bullets" type="Node2D" parent="."]
 
 [node name="Player" parent="." instance=ExtResource("1_7t06c")]
-position = Vector2(0, -1)
+position = Vector2(1069, 41)
 
 [node name="normal_enemy" parent="." instance=ExtResource("3_2ytpj")]
 position = Vector2(993, 455)
