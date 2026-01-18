@@ -11,9 +11,9 @@ signal announcement_started(title: String)
 signal all_announcements_finished
 
 # --- 节点绑定 (根据你的截图路径) ---
-@onready var banner_container: PanelContainer = $Control/BannerContainer
-@onready var title_label: Label = $Control/BannerContainer/ContentBox/TitleLabel
-@onready var desc_label: Label = $Control/BannerContainer/ContentBox/DescLabel
+@onready var banner_container: PanelContainer = $BannerContainer
+@onready var title_label: Label = $BannerContainer/ContentBox/TitleLabel
+@onready var desc_label: Label = $BannerContainer/ContentBox/DescLabel
 # 截图中的 Separator 不需要代码控制，所以不用绑定
 
 # --- 数据结构定义 ---

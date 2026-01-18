@@ -20,37 +20,27 @@ thickness = 3
 layer = 2
 script = ExtResource("1_dv1b2")
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="BannerContainer" type="PanelContainer" parent="Control"]
-layout_mode = 0
+[node name="BannerContainer" type="PanelContainer" parent="."]
 offset_left = 160.0
 offset_top = 48.0
 offset_right = 976.0
 offset_bottom = 144.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_x4kvs")
 
-[node name="ContentBox" type="VBoxContainer" parent="Control/BannerContainer"]
+[node name="ContentBox" type="VBoxContainer" parent="BannerContainer"]
 layout_mode = 2
 
-[node name="TitleLabel" type="Label" parent="Control/BannerContainer/ContentBox"]
+[node name="TitleLabel" type="Label" parent="BannerContainer/ContentBox"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_font_sizes/font_size = 21
 text = "  WARING                                                                                                                                     X"
 
-[node name="Separator" type="HSeparator" parent="Control/BannerContainer/ContentBox"]
+[node name="Separator" type="HSeparator" parent="BannerContainer/ContentBox"]
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxLine_ylmy7")
 
-[node name="DescLabel" type="Label" parent="Control/BannerContainer/ContentBox"]
+[node name="DescLabel" type="Label" parent="BannerContainer/ContentBox"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.26646256, 0.31053197, 0.9617582, 1)
 theme_override_font_sizes/font_size = 32
