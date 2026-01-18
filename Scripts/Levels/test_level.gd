@@ -10,7 +10,7 @@ extends Node2D
 @export var player_avater: Texture = preload("res://Assets/Player/player_avater.png")
 @export var max_enemies_count: int = 150
 @export var max_special_enemies_count: int = 1
-var current_enemies_count: int = 0
+@export var current_enemies_count: int = 0
 
 #设置生成地图的边界
 @export var map_width: float = 1450.0
@@ -19,8 +19,38 @@ var current_enemies_count: int = 0
 @export var map_center: Vector2 = Vector2(576, 324)
 
 func _ready() -> void:
-	GameHUD.instance.setup_player("Player", 1, player.health, player_avater)
-	Global.current_kill_count = 0
+	# 方法1：检查并确保 EventAnnouncer 存在
+	ensure_event_announcer()
+	
+	# 方法2：直接显示测试消息
+	test_announcer()
+	
+	# ... 其他代码 ...
+
+func ensure_event_announcer():
+	# 如果单例不存在，创建并添加
+	if not EventAnnouncer.instance:
+		print("创建 EventAnnouncer...")
+		var announcer_scene = preload("res://Scenes/UI/Event_Announcer/EventAnnouncer.tscn")
+		var announcer = announcer_scene.instantiate()
+		get_tree().root.add_child(announcer)
+		# 等待一帧让 EventAnnouncer 初始化
+		await get_tree().process_frame
+
+func test_announcer():
+	if EventAnnouncer.instance:
+		print("测试广播...")
+		EventAnnouncer.instance.show_warning("TEST", "这是一个测试广播")
+	else:
+		print("EventAnnouncer 仍然不存在")
+
+#func _ready() -> void:
+#	print("EventAnnouncer.instance 是否存在:", EventAnnouncer.instance != null)
+#	if EventAnnouncer.instance:
+#		EventAnnouncer.instance.show_warning("Trojan", "检测到恶意软件！")
+#		print("abs")
+#	GameHUD.instance.setup_player("Player", 1, player.health, player_avater)
+#	Global.current_kill_count = 0
 	
 func _physics_process(_delta: float) -> void:
 	Global.player_position = player.global_position#实时更新玩家全局位置
@@ -30,7 +60,7 @@ func _physics_process(_delta: float) -> void:
 	#测试用，打印当前杀敌数
 	
 	#判断是否胜利
-	if Global.current_kill_count >= 145:
+	if Global.current_kill_count >= 70:
 		victory()
 
 #发送子弹
@@ -96,7 +126,7 @@ func victory():
 	#测试用,打印是否胜利
 	#print("success")
 	#测试用,打印是否胜利
-	pass
+	SuccessScreen.instance.show_success()
 
 
 #Test_Level节点下SpawnTimer生成敌人时间信号
@@ -106,10 +136,6 @@ func _on_spawn_timer_timeout() -> void:
 
 
 func _on_player_player_died() -> void:#玩家死亡信号
-	#测试用
-	print("player is died")
-	#测试用
-	
 	pass
 
 func _on_special_spawn_timer_timeout() -> void:
