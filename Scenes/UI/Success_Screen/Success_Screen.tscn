@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=3 uid="uid://bxfnjcxdy3vbt"]
+
+[ext_resource type="Script" uid="uid://cauypnwvhfddr" path="res://Scripts/UI/Success_Screen/success_screen.gd" id="1_l378g"]
+
+[node name="SuccessScreen" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_l378g")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 392.0
+offset_top = 80.0
+offset_right = 764.0
+offset_bottom = 167.0
+theme_override_colors/font_color = Color(3.080368e-06, 0.69594806, 0.15932146, 1)
+theme_override_font_sizes/font_size = 30
+text = "胜利!
+准备迎接下一关!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 384.0
+offset_top = 256.0
+offset_right = 768.0
+offset_bottom = 448.0
+
+[node name="NextScreenButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "开启新的一天"
+
+[node name="TitleGameButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "返回标题"
+
+[connection signal="pressed" from="VBoxContainer/NextScreenButton" to="." method="_on_next_screen_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/TitleGameButton" to="." method="_on_title_game_button_pressed"]

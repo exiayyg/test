@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3 uid="uid://tgftivi0doxw"]
+
+[ext_resource type="Script" uid="uid://cwjn6bjfuppm5" path="res://Scripts/UI/Failure_Screen/failure_screen.gd" id="1_abbju"]
+
+[node name="FailureScreen" type="CanvasLayer"]
+process_mode = 3
+layer = 2
+script = ExtResource("1_abbju")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 392.0
+offset_top = 80.0
+offset_right = 764.0
+offset_bottom = 167.0
+theme_override_colors/font_color = Color(1, 0.26, 0.26, 1)
+theme_override_font_sizes/font_size = 30
+text = "失败......
+您的Debug水平还有待加强!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 384.0
+offset_top = 256.0
+offset_right = 768.0
+offset_bottom = 448.0
+
+[node name="RestartGameButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "重新投递简历"
+
+[node name="TitleGameButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "返回标题"
+
+[connection signal="pressed" from="VBoxContainer/RestartGameButton" to="." method="_on_restart_game_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/TitleGameButton" to="." method="_on_title_game_button_pressed"]
