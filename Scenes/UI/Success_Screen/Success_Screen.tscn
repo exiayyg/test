@@ -4,6 +4,7 @@
 
 [node name="SuccessScreen" type="CanvasLayer"]
 process_mode = 3
+layer = 3
 script = ExtResource("1_l378g")
 
 [node name="Label" type="Label" parent="."]
