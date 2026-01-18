@@ -3,11 +3,13 @@ extends Node2D
 @export var bullet_scene: PackedScene = preload("res://Scenes/Bullets/bullet.tscn")
 #预加载子弹场景
 @export var normal_enemy_scene: PackedScene = preload("res://Scenes/characters/Enemies/normal_enemy.tscn")
+@export var special_enemy_scene: PackedScene = preload("res://Scenes/characters/Enemies/Special_enemy.tscn")
 #预加载普通敌人场景
 @onready var player: CharacterBody2D = $Player
 
 @export var player_avater: Texture = preload("res://Assets/Player/player_avater.png")
 @export var max_enemies_count: int = 150
+@export var max_special_enemies_count: int = 1
 var current_enemies_count: int = 0
 
 #设置生成地图的边界
@@ -50,8 +52,14 @@ func create_enemies(spawn_position: Vector2 = Vector2(0, 0)):#创建敌人方法
 		$Enemies.add_child(normal_enemy)#将实例化的敌人场景存入Enemies节点中
 		current_enemies_count += 1
 		
-		
-		
+func create_special_enemies(spawn_position: Vector2 = Vector2(0, 0)):
+	if Global.special_enemy_count < max_special_enemies_count:
+		var special_enemy = special_enemy_scene.instantiate()
+		if spawn_position == Vector2.ZERO:
+			spawn_position = GetRandomSpawnPositionInsideMap()
+		special_enemy.global_position = spawn_position
+		$Enemies.add_child(special_enemy)
+		#Global.register_special_enemy()
 		#测试用，打印生成敌人数量
 		#print(current_enemies_count)
 		#测试用，打印生成敌人数量
@@ -64,16 +72,24 @@ func GetRandomSpawnPositionOutsideMap() -> Vector2:
 	match side:
 		0:#上边
 			spawn_pos.x = randf_range(0, map_width)
-			spawn_pos.y = 0 - spawn_margin
+			spawn_pos.y = 0
 		1:#右边
-			spawn_pos.x = map_width + spawn_margin
+			spawn_pos.x = map_width
 			spawn_pos.y = randf_range(0, map_height)
 		2:#下边
 			spawn_pos.x = randf_range(0, map_width)
-			spawn_pos.y = map_height + spawn_margin
+			spawn_pos.y = map_height
 		3:#左边
 			spawn_pos.x = 0 - spawn_margin
 			spawn_pos.y = randf_range(0, map_height)
+	return spawn_pos
+
+func GetRandomSpawnPositionInsideMap() -> Vector2:
+	var spawn_pos: Vector2 = Vector2.ZERO
+	
+	spawn_pos.x = randf_range(20, map_width)
+	spawn_pos.y = randf_range(20, map_height)
+
 	return spawn_pos
 
 func victory():
@@ -88,9 +104,13 @@ func _on_spawn_timer_timeout() -> void:
 	create_enemies()
 
 
+
 func _on_player_player_died() -> void:#玩家死亡信号
 	#测试用
 	print("player is died")
 	#测试用
 	
 	pass
+
+func _on_special_spawn_timer_timeout() -> void:
+	create_special_enemies()

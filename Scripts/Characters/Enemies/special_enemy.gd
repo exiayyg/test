@@ -22,12 +22,10 @@ extends Enemy
 var distance_to_player: Vector2
 var current_wander_direction: Vector2 = Vector2.ZERO
 var wander_timer: float = 0.0
-var debug_current_direction: Vector2 = Vector2.ZERO # 用于Debug绘制
 
 @onready var game_state = get_node("/root/Global")
 
 func _process(delta):
-	queue_redraw() 
 	SpecialUpdateSpriteRotation()
 
 func _physics_process(delta: float) -> void:
@@ -82,7 +80,6 @@ func SpecialEnemyMovement(delta: float) -> void:
 
 	# 应用移动 (追击和逃跑状态)
 	velocity = desired_velocity
-	debug_current_direction = velocity.normalized() # 记录用于绘图
 	move_and_slide()
 
 # =============================================
@@ -113,7 +110,6 @@ func Wander(delta: float) -> void:
 		current_wander_direction = MakeDirectionSafe(new_direction).normalized()
 	
 	velocity = current_wander_direction * wander_speed
-	debug_current_direction = current_wander_direction # 记录用于绘图
 
 # =============================================
 # 通用智能避障方向获取器
@@ -178,17 +174,4 @@ func _ready():
 
 func _exit_tree():
 	game_state.unregister_special_enemy()
-
-
-func _draw():
-	# 安全圆环
-	draw_arc(Vector2.ZERO, keep_away_from_player_min, 0, TAU, 32, Color.RED, 2.0)
-	draw_arc(Vector2.ZERO, keep_away_from_player_max, 0, TAU, 32, Color.GREEN, 2.0)
-	
-	# 避障射线可视化
-	if debug_current_direction != Vector2.ZERO:
-		# 画出当前实际移动意图
-		draw_line(Vector2.ZERO, debug_current_direction * obstacle_check_ray_length, Color.YELLOW, 2.0)
-		
-		if check_direction_blocked(debug_current_direction):
-			draw_circle(debug_current_direction * obstacle_check_ray_length, 5.0, Color.MAGENTA)
+	print("hello")

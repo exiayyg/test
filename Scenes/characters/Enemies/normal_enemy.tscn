@@ -3,10 +3,10 @@
 [ext_resource type="Script" uid="uid://cy7h0kg8fknu6" path="res://Scripts/Characters/Enemies/normal_enemy.gd" id="1_br4l2"]
 [ext_resource type="Texture2D" uid="uid://bh41hlij1ycr5" path="res://Assets/Enemy/Bugs.png" id="2_cxtvy"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vg13p"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_cxtvy"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cxtvy"]
-size = Vector2(64.625854, 64.625854)
+[sub_resource type="CircleShape2D" id="CircleShape2D_vg13p"]
+radius = 35.714283
 
 [node name="normal_enemy" type="CharacterBody2D"]
 collision_layer = 4
@@ -15,7 +15,7 @@ script = ExtResource("1_br4l2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(0.5, 0.5)
-shape = SubResource("RectangleShape2D_vg13p")
+shape = SubResource("CircleShape2D_cxtvy")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.03, 0.03)
@@ -29,7 +29,7 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="attack_area"]
 position = Vector2(9.536738e-06, -9.536741e-06)
 scale = Vector2(5.8799996, 5.8799996)
-shape = SubResource("RectangleShape2D_cxtvy")
+shape = SubResource("CircleShape2D_vg13p")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 

@@ -8,10 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://bjq4yui5a6b1g" path="res://Scenes/UI/HUD/HUD.tscn" id="6_k8g1k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k8g1k"]
-size = Vector2(49, 1104)
+size = Vector2(109.5, 1414.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x4x4f"]
-size = Vector2(1670, 55)
+size = Vector2(1960, 109.5)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_npfmg"]
 load_path = "res://.godot/imported/wall.png-ebbaa072c6fb30390469ef894ab37825.ctex"
@@ -51,7 +51,7 @@ collision_layer = 16
 collision_mask = 14
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall/Left_wall"]
-position = Vector2(-28, 546)
+position = Vector2(-58.75, 523.5)
 shape = SubResource("RectangleShape2D_k8g1k")
 
 [node name="Right_wall" type="StaticBody2D" parent="Wall"]
@@ -60,7 +60,7 @@ collision_layer = 16
 collision_mask = 14
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall/Right_wall"]
-position = Vector2(-28, 546)
+position = Vector2(44, 594)
 shape = SubResource("RectangleShape2D_k8g1k")
 
 [node name="Top_wall" type="StaticBody2D" parent="Wall"]
@@ -68,7 +68,7 @@ collision_layer = 16
 collision_mask = 14
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall/Top_wall"]
-position = Vector2(825, -17.5)
+position = Vector2(874, -60.75)
 shape = SubResource("RectangleShape2D_x4x4f")
 
 [node name="Buttom_wall" type="StaticBody2D" parent="Wall"]
@@ -77,12 +77,14 @@ collision_layer = 16
 collision_mask = 14
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall/Buttom_wall"]
-position = Vector2(825, -17.5)
+position = Vector2(828, 43)
 shape = SubResource("RectangleShape2D_x4x4f")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = -74.99999
+offset_top = -79.999985
+offset_right = -31.270565
+offset_bottom = -34.57726
 scale = Vector2(41.025, 27.144999)
 
 [node name="BackGround" type="Sprite2D" parent="."]
@@ -97,12 +99,16 @@ position = Vector2(489, 325)
 [node name="normal_enemy" parent="." instance=ExtResource("3_2ytpj")]
 position = Vector2(993, 455)
 
+[node name="SpecialSpawnTimer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
 [node name="SpawnTimer" type="Timer" parent="."]
 wait_time = 2.0
 autostart = true
 
 [node name="Special_Enemy" parent="." instance=ExtResource("4_db73o")]
-position = Vector2(802, 507)
+position = Vector2(991, 346)
 
 [node name="Tilemap" type="Node2D" parent="."]
 
@@ -119,4 +125,5 @@ navigation_polygon = SubResource("NavigationPolygon_npfmg")
 
 [connection signal="player_died" from="Player" to="." method="_on_player_player_died"]
 [connection signal="shoot_string" from="Player" to="." method="_on_player_shoot_string"]
+[connection signal="timeout" from="SpecialSpawnTimer" to="." method="_on_special_spawn_timer_timeout"]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
