@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://b8n4hoi05ysjr"]
 
 [ext_resource type="Script" uid="uid://bx48yd4ggjt0v" path="res://Scripts/Bullets/bullet.gd" id="1_tcy0y"]
-[ext_resource type="Texture2D" uid="uid://dhhsscrn6ucp2" path="res://icon.svg" id="2_qngn8"]
+[ext_resource type="Texture2D" uid="uid://i5tmycb3qs1n" path="res://Assets/Bullets/精灵-0002-Sheet.png" id="2_qngn8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wie2n"]
 
@@ -15,7 +15,7 @@ direction = Vector2(1, 0)
 shape = SubResource("CircleShape2D_wie2n")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.08203125, 0.08203125)
+scale = Vector2(0.292, 0.292)
 texture = ExtResource("2_qngn8")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

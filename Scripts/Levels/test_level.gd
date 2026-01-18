@@ -8,8 +8,8 @@ extends Node2D
 
 @export var player_avater: Texture = preload("res://Assets/Player/player.png")
 #设置生成地图的边界
-@export var map_width: float = 1152.0
-@export var map_height: float =  648.0
+@export var map_width: float = 1450.0
+@export var map_height: float = 930.0
 @export var spawn_margin: float = 50.0
 @export var map_center: Vector2 = Vector2(576, 324)
 
