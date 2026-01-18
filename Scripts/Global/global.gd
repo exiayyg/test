@@ -8,6 +8,7 @@ var player_position: Vector2
 var is_special_enemy_present = false
 var inverted_controls = false
 var special_enemy_count = 0  # 添加特殊敌人计数器
+var current_kill_count: int = 0
 
 signal controls_inverted_changed(inverted)
 

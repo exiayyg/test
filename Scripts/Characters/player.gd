@@ -33,11 +33,10 @@ func Shoot():
 	#print("shoot")
 
 func died():#玩家死亡逻辑
-	print("player died")
 	player_died.emit()
 	pass
 
-#伤害逻辑
+#伤害逻辑d
 func hurt(damage: float):
 	if can_hurt:
 		$AnimationPlayer.play("hurt")

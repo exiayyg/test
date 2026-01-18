@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://dpk0loj7y6sj3"]
+[gd_scene load_steps=12 format=4 uid="uid://dpk0loj7y6sj3"]
 
 [ext_resource type="PackedScene" uid="uid://doix4tmk08j2l" path="res://Scenes/characters/player.tscn" id="1_7t06c"]
 [ext_resource type="Script" uid="uid://d1aoemn1hr250" path="res://Scripts/Levels/test_level.gd" id="1_b07c4"]
@@ -6,6 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://cj8rug5ml2gcv" path="res://Scenes/characters/Enemies/normal_enemy.tscn" id="3_2ytpj"]
 [ext_resource type="PackedScene" uid="uid://0wcttjmqkm8d" path="res://Scenes/characters/Enemies/Special_enemy.tscn" id="4_db73o"]
 [ext_resource type="PackedScene" uid="uid://bjq4yui5a6b1g" path="res://Scenes/UI/HUD/HUD.tscn" id="6_k8g1k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k8g1k"]
+size = Vector2(49, 1104)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x4x4f"]
+size = Vector2(1670, 55)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k8g1k"]
 texture = ExtResource("2_npfmg")
@@ -26,6 +32,43 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(156, 408, 155, 478, 276
 
 [node name="Test_Level" type="Node2D"]
 script = ExtResource("1_b07c4")
+
+[node name="Wall" type="Node2D" parent="."]
+
+[node name="Left_wall" type="StaticBody2D" parent="Wall"]
+position = Vector2(3, 0)
+collision_layer = 16
+collision_mask = 14
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall/Left_wall"]
+position = Vector2(-28, 546)
+shape = SubResource("RectangleShape2D_k8g1k")
+
+[node name="Right_wall" type="StaticBody2D" parent="Wall"]
+position = Vector2(1632, 0)
+collision_layer = 16
+collision_mask = 14
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall/Right_wall"]
+position = Vector2(-28, 546)
+shape = SubResource("RectangleShape2D_k8g1k")
+
+[node name="Top_wall" type="StaticBody2D" parent="Wall"]
+collision_layer = 16
+collision_mask = 14
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall/Top_wall"]
+position = Vector2(825, -17.5)
+shape = SubResource("RectangleShape2D_x4x4f")
+
+[node name="Buttom_wall" type="StaticBody2D" parent="Wall"]
+position = Vector2(6, 1030)
+collision_layer = 16
+collision_mask = 14
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall/Buttom_wall"]
+position = Vector2(825, -17.5)
+shape = SubResource("RectangleShape2D_x4x4f")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_right = 40.0
