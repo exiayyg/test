@@ -4,7 +4,7 @@
 
 [node name="FailureScreen" type="CanvasLayer"]
 process_mode = 3
-layer = 2
+layer = 3
 script = ExtResource("1_abbju")
 
 [node name="Label" type="Label" parent="."]
