@@ -17,7 +17,7 @@ var current_enemies_count: int = 0
 @export var map_center: Vector2 = Vector2(576, 324)
 
 func _ready() -> void:
-	GameHUD.instance.setup_player("Player", 1, player.health,)
+	GameHUD.instance.setup_player("Player", 1, player.health, player_avater)
 	Global.current_kill_count = 0
 	
 func _physics_process(_delta: float) -> void:
