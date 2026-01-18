@@ -10,10 +10,10 @@ config_version=5
 
 [application]
 
-config/name="bug_test"
+config/name="BUG!!!"
 run/main_scene="uid://dvm2bnqttwhy8"
 config/features=PackedStringArray("4.5", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="uid://os8raknfsisb"
 
 [autoload]
 
@@ -23,6 +23,8 @@ Global="*res://Scripts/Global/global.gd"
 
 window/size/viewport_width=1600
 window/size/viewport_height=1000
+mouse_cursor/custom_image="uid://disdnjpnof4ab"
+mouse_cursor/custom_image_hotspot=Vector2(32, 32)
 
 [input]
 

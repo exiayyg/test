@@ -132,6 +132,7 @@ navigation_polygon = SubResource("NavigationPolygon_npfmg")
 [node name="SuccessScreen" parent="." instance=ExtResource("7_l7ek2")]
 
 [node name="FailureScreen" parent="." instance=ExtResource("8_7rivk")]
+layer = 2
 
 [connection signal="player_died" from="Player" to="." method="_on_player_player_died"]
 [connection signal="shoot_string" from="Player" to="." method="_on_player_shoot_string"]
