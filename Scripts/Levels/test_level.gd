@@ -86,3 +86,11 @@ func victory():
 #Test_Level节点下SpawnTimer生成敌人时间信号
 func _on_spawn_timer_timeout() -> void:
 	create_enemies()
+
+
+func _on_player_player_died() -> void:#玩家死亡信号
+	#测试用
+	print("player is died")
+	#测试用
+	
+	pass

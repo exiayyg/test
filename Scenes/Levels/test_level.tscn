@@ -107,5 +107,6 @@ navigation_polygon = SubResource("NavigationPolygon_npfmg")
 
 [node name="Hud" parent="." instance=ExtResource("6_k8g1k")]
 
+[connection signal="player_died" from="Player" to="." method="_on_player_player_died"]
 [connection signal="shoot_string" from="Player" to="." method="_on_player_shoot_string"]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
