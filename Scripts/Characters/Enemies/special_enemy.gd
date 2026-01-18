@@ -25,7 +25,7 @@ var wander_timer: float = 0.0
 
 @onready var game_state = get_node("/root/Global")
 
-func _process(delta):
+func _process(_delta):
 	SpecialUpdateSpriteRotation()
 	if health <= 0:#如果生命值小于零，则死亡
 		died()

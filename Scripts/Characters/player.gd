@@ -37,7 +37,7 @@ func died():#玩家死亡逻辑
 	pass
 
 #伤害逻辑d
-func hurt(damage: float):
+func hurt(damage: int):
 	if can_hurt:
 		$AnimationPlayer.play("hurt")
 		health -= damage

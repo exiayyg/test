@@ -5,7 +5,7 @@ extends Area2D
 @export var direction: Vector2#子弹移动方向
 @onready var sprite_2d: Sprite2D = $Sprite2D
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	sprite_2d.rotation = lerp(sprite_2d.rotation, direction.angle(), 0.1)
 #子弹移动逻辑
 func _physics_process(delta: float) -> void:

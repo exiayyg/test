@@ -4,7 +4,7 @@ extends CharacterBody2D
 
 @export var speed: float = 100 #移动速度
 @export var health: float = 100 #生命值
-@export var damage: float = 1 #伤害
+@export var damage: int = 1 #伤害
 @onready var sprite_2d: Sprite2D = $Sprite2D
 
 

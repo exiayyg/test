@@ -8,7 +8,7 @@ extends Node2D
 @onready var player: CharacterBody2D = $Player
 
 @export var player_avater: Texture = preload("res://Assets/Player/player_avater.png")
-@export var max_enemies_count: int = 150
+@export var max_enemies_count: int = 75
 @export var max_special_enemies_count: int = 1
 @export var current_enemies_count: int = 0
 
@@ -24,7 +24,9 @@ func _ready() -> void:
 	
 	# 方法2：直接显示测试消息
 	test_announcer()
-	
+	GameHUD.instance.setup_player("Player", 1, player.health, player_avater)
+	Global.current_kill_count = 0#场景准备就绪时将当前杀敌数归零
+	#print(Global.current_kill_count)
 	# ... 其他代码 ...
 
 func ensure_event_announcer():
@@ -51,8 +53,7 @@ func test_announcer():
 #	if EventAnnouncer.instance:
 #		EventAnnouncer.instance.show_warning("Trojan", "检测到恶意软件！")
 #		print("abs")
-#	GameHUD.instance.setup_player("Player", 1, player.health, player_avater)
-#	Global.current_kill_count = 0
+	
 	
 func _physics_process(_delta: float) -> void:
 	Global.player_position = player.global_position#实时更新玩家全局位置
