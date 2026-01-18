@@ -36,6 +36,8 @@ func hurt(bullet_damage: float):
 
 #敌人死亡逻辑
 func died():
+	Global.current_kill_count += 1
+	GameHUD.instance.update_kill_count_display()
 	queue_free()
 
 #碰撞玩家逻辑

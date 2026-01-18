@@ -47,9 +47,9 @@ func _ready() -> void:
 	
 	# 【自动化测试入口】
 	# 仅在编辑器模式下，且当前是独立运行此场景时触发
-	if OS.has_feature("editor") and get_parent() == get_tree().root:
-		print("--- Debug模式: 启动测试用例 ---")
-		run_debug_test()
+#	if OS.has_feature("editor") and get_parent() == get_tree().root:
+#		print("--- Debug模式: 启动测试用例 ---")
+#		run_debug_test()
 
 # --- 公共 API (Public Methods) ---
 

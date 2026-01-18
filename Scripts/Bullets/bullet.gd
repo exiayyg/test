@@ -20,4 +20,5 @@ func _on_body_entered(body: Node2D) -> void:#子弹碰撞信号
 	if "is_enemy" in body:#如果碰撞对象是敌人
 		body.queue_free()#销毁敌人
 		Global.current_kill_count += 1
+		GameHUD.instance.update_kill_count_display()
 	queue_free()#销毁子弹

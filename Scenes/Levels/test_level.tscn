@@ -101,6 +101,9 @@ position = Vector2(489, 325)
 
 [node name="normal_enemy" parent="." instance=ExtResource("3_2ytpj")]
 position = Vector2(993, 455)
+speed = 100.0
+health = 100.0
+damage = 1.0
 
 [node name="SpecialSpawnTimer" type="Timer" parent="."]
 wait_time = 10.0

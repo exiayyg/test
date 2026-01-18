@@ -27,6 +27,8 @@ var wander_timer: float = 0.0
 
 func _process(delta):
 	SpecialUpdateSpriteRotation()
+	if health <= 0:#如果生命值小于零，则死亡
+		died()
 
 func _physics_process(delta: float) -> void:
 	SpecialEnemyMovement(delta)

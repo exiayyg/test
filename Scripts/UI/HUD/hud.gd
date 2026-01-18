@@ -16,7 +16,7 @@ signal health_changed(current_hp: int, max_hp: int)
 @onready var level_label: Label = $PlayerContainer/PlayerPanel/Flex/PlayerInfoBox/PlayerLevelLabel
 @onready var health_bar: ProgressBar = $PlayerContainer/PlayerPanel/Flex/PlayerInfoBox/LifebloodContainer/LifeBar
 @onready var health_nums_label: Label = $PlayerContainer/PlayerPanel/Flex/PlayerInfoBox/LifebloodContainer/LifeBar/LifeNumsLabel
-
+@onready var kill_enemy_count: Label = $KillEnemyCount
 # --- 内部状态 ---
 var _max_hp: int = 3
 var _current_hp: int = 3
@@ -34,6 +34,7 @@ func _exit_tree() -> void:
 		instance = null
 
 func _ready() -> void:
+	setup_kill_count_display()
 	# 【调试开关】如果是独立运行此场景，自动开始测试
 	# OS.has_feature("editor") 确保只在编辑器环境下运行测试，打包发布后自动失效
 	if get_parent() == get_tree().root and OS.has_feature("editor"):
@@ -129,3 +130,15 @@ func run_debug_test() -> void:
 	print("6. 测试死亡 (100 -> 0)...")
 	update_health(0)
 	# 这里不需要 await，因为 _animate_bar 里有打印 log
+
+
+
+# 初始化方法
+func setup_kill_count_display():
+	# 初始显示
+	update_kill_count_display()
+
+# 更新消灭敌人数量显示
+func update_kill_count_display():
+	if kill_enemy_count:
+		kill_enemy_count.text = "已消灭: %d" % Global.current_kill_count

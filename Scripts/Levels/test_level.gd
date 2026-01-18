@@ -40,7 +40,9 @@ func ensure_event_announcer():
 func test_announcer():
 	if EventAnnouncer.instance:
 		print("测试广播...")
-		EventAnnouncer.instance.show_warning("TEST", "这是一个测试广播")
+		EventAnnouncer.instance.show_warning("ALARGESUMOFBUGS", "检测到大量bugs正在接近！")
+		await get_tree().create_timer(2.0).timeout
+		EventAnnouncer.instance.show_warning("SUPERBOSS", "键盘映射有点问题，怎么回事？")
 	else:
 		print("EventAnnouncer 仍然不存在")
 
@@ -60,7 +62,7 @@ func _physics_process(_delta: float) -> void:
 	#测试用，打印当前杀敌数
 	
 	#判断是否胜利
-	if Global.current_kill_count >= 70:
+	if Global.current_kill_count >= 20:
 		victory()
 
 #发送子弹
@@ -89,6 +91,7 @@ func create_special_enemies(spawn_position: Vector2 = Vector2(0, 0)):
 			spawn_position = GetRandomSpawnPositionInsideMap()
 		special_enemy.global_position = spawn_position
 		$Enemies.add_child(special_enemy)
+		EventAnnouncer.instance.show_warning("SUPERBOSS", "特殊BUG已出现！")
 		#Global.register_special_enemy()
 		#测试用，打印生成敌人数量
 		#print(current_enemies_count)
@@ -126,6 +129,7 @@ func victory():
 	#测试用,打印是否胜利
 	#print("success")
 	#测试用,打印是否胜利
+	Global.current_kill_count = 0
 	SuccessScreen.instance.show_success()
 
 

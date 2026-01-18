@@ -52,6 +52,7 @@ func _on_next_screen_button_pressed() -> void:
 	# 4. 【关键】切换场景前必须取消暂停！
 	get_tree().paused = false
 	
+	
 	if _next_level_path != "":
 		# 如果传入了具体的下一关路径，则跳转
 		get_tree().change_scene_to_file(_next_level_path)
@@ -60,6 +61,7 @@ func _on_next_screen_button_pressed() -> void:
 		# 如果还没做下一关，暂时先"重新加载当前关卡"作为演示
 		# 或者跳转回这一关的测试场景
 		print("未指定下一关，重新加载当前场景...")
+		
 		get_tree().reload_current_scene()
 
 
